@@ -1,0 +1,12 @@
+7-Zip 21.07 (x64);7-Zip
+HP Client Security Manager;
+HP Dock Audio;
+HP Documentation;
+Aplicaciones de Microsoft 365 para empresas - es-es;
+Microsoft OneDrive;OneDrive
+PuTTY release 0.76 (64-bit);PuTTY
+Google Chrome;Chrome
+Oracle VM VirtualBox 6.1.22;VM VirtualBox
+Microsoft Edge;Edge
+Python Launcher;Python
+Adobe Acrobat Reader DC - Catalan;Acrobat Reader
