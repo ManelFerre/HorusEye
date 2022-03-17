@@ -1,4 +1,3 @@
-# import necessary packages
  
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -7,34 +6,34 @@ import sys
  
  
 def enviaMail(nombre, version,  cves):
-    # create message object instance
+    # instanciamos
     msg = MIMEMultipart()
 
-    # setup the parameters of the message
-    password = "rjjvumbzsvnpkspg"
+    # Paramentros conexion
+    password = "jjvumbzsvnpkspgr"
     msg['From'] = "horuseye.notification@gmail.com"
-    msg['To'] = "horuseye.notification@gmail.com"
+    msg['To'] = "manel.ferre@tecdes.es"
     msg['Subject'] = nombre + " Alerta Vulnerabilidad encotrada"
     
-    # add in the message body
+    # mensaje
     textm =  "Nombre  : " + nombre + '\n' 
     textm += "Version : " + version + '\n\n\n'
     textm += '\n'.join(cves)
     msg.attach(MIMEText(textm, 'plain'))
     
-    #create server
+    #Servidor
     server = smtplib.SMTP('smtp.gmail.com: 587')
     
     server.starttls()
     
     try:
 
-        # Login Credentials for sending the mail
+        # Login 
         server.login(msg['From'], password)
 
-        # send the message via the server.
+        # enviamos mensaje
         server.sendmail(msg['From'], msg['To'], msg.as_string())
         server.quit()
     except Exception:
         e = sys.exc_info()[1]
-        print(e.args[0])
+        print('Error : ' + e.args[0] + ' al enviar mensaje')

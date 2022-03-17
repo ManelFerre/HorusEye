@@ -13,22 +13,29 @@ from os import path
 import argparse
 from tkinter.font import names
 
-import fwindows
-import flinux
-import fmac
+
+
+# Cargamos funciones segun su sistema operativo /win32/Linux/Darwin
+sistemaOperativo = sys.platform
+if(sistemaOperativo == "win32"):
+    import fwindows
+elif(sistemaOperativo == "linux"):
+    import flinux
+elif(sistemaOperativo == "darwin"):
+    import fmac
+# Funcion de busqueda de vulnerabilidades en CVE Details
 import fvulns
+# Configuración Constantes
 import config 
 
 
 
 
 # Variables globales
-listTranslate=[]
-listForzar=[]
-listDemo=[]
-TextMessage = ""
+listTranslate=[] # Lista de sinónimos
+listForzar=[]    # Lista de aplicaciones a monitorizar forzosas
+listDemo=[]      # Lista de aplicaciones para DEMO (vulnerables)
 
-sistemaOperativo = sys.platform # Detectar sistema operativo /win32/Linux/Darwin
 
 # lee el fichero de translate para cambiar el nombre que nos dice el SO con el que tiene dado de alta CVDetails
 def leeSinonimos():
@@ -54,27 +61,33 @@ def leeAppDemoVulnerables():
             listDemo.append(line)
     source.close()
 
-
-
-
-
-def createFile():
+# mueve las listas 
+def ini():
     if(sistemaOperativo == "win32"):
         fwindows.listTranslate = listTranslate
+    elif(sistemaOperativo == "Linux"):
+        flinux.listTranslate = listTranslate
+    elif(sistemaOperativo == "Darwin"):
+        fmac.listTranslate = listTranslate
+
+
+# crea los ficheros de aplicaciones
+def createFile():
+    if(sistemaOperativo == "win32"):
         fwindows.createFile()
     elif(sistemaOperativo == "Linux"):
         flinux.createFile()
     elif(sistemaOperativo == "Darwin"):
         fmac.createFile()
 
-
+# Carga las demos
 def vulnDemo():
     if len(listDemo)>0:
         for x in listDemo:
             nametemp = x.split(";") 
             fvulns.busca_cve(nametemp[0], nametemp[1])
 
-
+# Busca segun version
 def vulnVersion():
     if(sistemaOperativo == "win32"):
         fwindows.vulnVersion()
@@ -137,12 +150,15 @@ def main():
     if path.exists(config.ConstDemoVulnerables):    
         leeAppDemoVulnerables()    
 
+    # mueve listas
+    ini()
 
     # creamos el fichero de applicaciones del servidor
     print ("Creamos ficheros temporales")
     createFile()
 
     # Buscamos vulnerabilidades a fecha de hoy
+    # se basa en los ficheros generados y en el de forzado
     print ("Monitorizando aplicaciones")
     fvulns.monitorizarapps()
 
