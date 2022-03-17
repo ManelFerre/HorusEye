@@ -1,0 +1,30 @@
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Management Engine Components
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=SafeSign 64-bits
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Wolf Security
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Update Health Tools
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Windows Subsystem for Linux Update
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Security Update Service
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Serial IO
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Comprovació de l'estat de l'ordinador del Windows
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2010  x64 Redistributable - 10.0.30319
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Sure Run
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Sure Recover
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Citrix Workspace 2006
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Edge Update
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Edge WebView2 Runtime
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Realtek USB Audio
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2010  x86 Redistributable - 10.0.30319
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP MAC Address Manager
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Collaboration Keyboard for Skype for Business
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HttpToUsbBridge
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Collaboration Keyboard
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Chipset Device Software
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Connection Optimizer
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Dynamic Tuning
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Teams Machine-Wide Installer
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2015-2019 Redistributable (x64) - 14.26.28720
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Notifications
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Collaboration Keyboard For Cisco UCC
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2015-2019 Redistributable (x86) - 14.24.28127
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Processor Graphics
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Brother iPrint&Scan

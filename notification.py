@@ -11,7 +11,7 @@ def enviaMail(nombre, version,  cves):
     msg = MIMEMultipart()
 
     # setup the parameters of the message
-    password = "ajjvumbzsvnpkspgr"
+    password = "rjjvumbzsvnpkspg"
     msg['From'] = "horuseye.notification@gmail.com"
     msg['To'] = "horuseye.notification@gmail.com"
     msg['Subject'] = nombre + " Alerta Vulnerabilidad encotrada"

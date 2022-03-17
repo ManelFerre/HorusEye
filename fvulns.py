@@ -1,25 +1,24 @@
 # funciones de busqueda vulnerabilidades
-import horuseye
+import config
 import requests
 import notification
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 from json import loads
-import argparse
+from os import path
 
 
 
-# si encuentra vulnerabilidad, la muestra
+# Vulnerabilidad segun version : si encuentra vulnerabilidad, la muestra 
 def showVuln(nombre, version, vendor_id, product_id, version_id):
     numrows = 30
     cves = []
-    tgcves = []
 
     # "https://www.cvedetails.com/json-feed.php?vendor_id=5842&product_id=9978&version_id=663953"
     try:
         link = '{0}?vendor_id={1}&product_id={2}&version_id={3}' \
-            .format(horuseye.ConstLinkJSon, vendor_id, product_id, version_id)
+            .format(config.ConstLinkJSon, vendor_id, product_id, version_id)
         # Going to URL and get JSON
         getjson = urlopen(Request(link, headers={'User-Agent': 'Mozilla'}))
         jsonr = getjson.read()
@@ -33,7 +32,6 @@ def showVuln(nombre, version, vendor_id, product_id, version_id):
                     .format(jp['cvss_score'], jp['url'])
                 # Keep results in arrays
                 cves.append(result)
-                tgcves.append(tresult)
             except(IndexError):
                 break
     except(ValueError, KeyError, TypeError):
@@ -62,7 +60,7 @@ def buscaPorLista(nombre, version, url):
                     crida_json(nombre, version, TextCVE)
 
         if (TextCVE== ""):
-              print("Sin vulnerabilidades")
+              print("   Sin vulnerabilidades")
     except:
         print("Error")      
 
@@ -123,7 +121,7 @@ def GetURL(url):
         bb = r.text[aaa:aaa2]
         result = ""
         if (bb>""):
-            result = horuseye.ConstURL + bb
+            result = config.ConstURL + bb
 #            print (result)
         return result
     except:
@@ -131,60 +129,51 @@ def GetURL(url):
 
 
 
-    
-
-def vuln():
-    # Arguments parsing
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-d', default=horuseye.today, dest='DATE')
-    parser.add_argument('-m', default='1', dest='MINCVSS')
-    parser.add_argument('-t', default='', dest='TGTOKENID', nargs=2)
-
-    namespace = parser.parse_args()
-
-    try:
-        tgtoken = namespace.TGTOKENID[0]
-        tgid = namespace.TGTOKENID[1]
-    except(IndexError):
-        tgtoken = ''
-        tgid = ''
-
-    date = namespace.DATE
-    mincvss = namespace.MINCVSS
-    year = date.split('-')[0]
-    month = date.split('-')[1]
-
-    ids = []
-    cves = []
-    tgcves = []
-
-    # Maximum rows for one product
-    numrows = 30
-
-    tgurl = 'https://api.telegram.org/bot'
-    tgfull = '{0}{1}/sendMessage'.format(tgurl, tgtoken)
-    feedlink = 'https://www.cvedetails.com/json-feed.php'
-    source = open(horuseye.ConstFileAppInstaladas, 'r')
-
-    # Getting product IDs from file
+def creaListaapps(ids, fileapps):
+    source = open(fileapps, 'r')
+    # Buscamos el Id del producto de la lista 
     for line in source:
         if not line.startswith('#') and line.strip():
             parsed = urlparse(line)
             path = parsed[2]
             pathlist = path.split('/')
-            ids.append(pathlist[2])
+            ids.append(pathlist[2] + ';' + pathlist[3].replace('.html',''))
     source.close()
 
-    # Get JSON
+
+
+def monitorizarapps():
+    date = config.today
+    fecha= date.split('-')[2] + '/' + date.split('-')[1] + '/' + date.split('-')[0]
+    mincvss = 1
+    year = date.split('-')[0]
+    month = date.split('-')[1]
+
+    cves = []
+    ids = []
+
+    # Numero máximo de resultados
+    numrows = 30
+
+    feedlink = 'https://www.cvedetails.com/json-feed.php'
+
+    # creamos  las listas
+    creaListaapps(ids,config.ConstFileAppInstaladas)
+    if path.exists(config.ConstFileAppForzar):    
+        creaListaapps(ids,config.ConstFileAppForzar)
+
+    vulencontrada = False
+    # Buscamos la vulnerabilidad
     try:
         for x in ids:
-            # Link example:
+            prod = x.split(';')
             # https://www.cvedetails.com/json-feed.php?product_id=47&month=02&year=2017&cvssscoremin=10&numrows=30
             link = '{0}?product_id={1}&month={2}&year={3}&cvssscoremin={4}&numrows={5}' \
-                .format(feedlink, x, month, year, mincvss, numrows)
-            # Going to URL and get JSON
+                .format(feedlink, prod[0], month, year, mincvss, numrows)
+
             getjson = urlopen(Request(link, headers={'User-Agent': 'Mozilla'}))
             jsonr = getjson.read()
+            print('Monitorizando ' + prod[1])
             for y in range(0, numrows):
                 try:
                     jp = loads(jsonr.decode('utf-8'))[y]
@@ -193,41 +182,33 @@ def vuln():
                             .format(jp['cve_id'], jp['cvss_score'], jp['url'])
                         tresult = 'CVSS: {0} URL: {1}' \
                             .format(jp['cvss_score'], jp['url'])
-                        # Keep results in arrays
+                        # guardamos el resultado en la lista
                         cves.append(result)
-                        tgcves.append(tresult)
                 except(IndexError):
                     break
+            # Notificamos si hay  (una notificacion por aplicacion)
+            if len(cves) != 0:
+                vulencontrada = True
+                print('Atencion encontradas nuevas vulnerabilidades a fecha ' + fecha)
+                print('En la Aplicacion : ' + prod[1])
+                print('\n'.join(cves))
+                print('')
+                notification.enviaMail(prod[1], '',  cves)
+            else:
+                print("   Sin vulnerabilidades")
+            # iniciamos lista
+            cves = []
+        
     except(ValueError, KeyError, TypeError):
         print('JSON format error')
 
-    # Getting data for Telegram
-    tgdata = '{0} report:\n{1}'.format(date, '\n'.join(tgcves))
-    tgparams = urlencode({'chat_id': tgid, 'text': tgdata}).encode('utf-8')
-
-    if len(cves) == 0:
-        print('There are no available vulnerabilities on ' + date)
-#        exit(0)
-    else:
-        print('\n'.join(cves))
-        if tgtoken == '' or tgid == '':
-            print('Telegram alert did not sent')
-#            exit(1)
-        else:
-            try:
-                urlopen(tgfull, tgparams)
-                print('Telegram alert sent')
-                exit(2)
-            except(HTTPError):
-                print('Telegram alert did not sent, check your token and ID')
-#                exit(3)
-
-
+    if vulencontrada == False:
+        print('No se han encontrado ninguna vulnerabilidad a fecha de ' + fecha)
 
 
 def busca_cve (nombre, version):
-      url =  horuseye.ConstVersionProduct + nombre
-      url += "&" + horuseye.ConstVersionVersion + version
+      url =  config.ConstVersionProduct + nombre
+      url += "&" + config.ConstVersionVersion + version
       #print (url)
       print("")
       print ("Buscando CVE de : " + nombre + " Version : " + version)

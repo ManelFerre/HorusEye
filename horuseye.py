@@ -8,43 +8,31 @@ from operator import truediv
 import sys
 
 from sys import exit
-from datetime import datetime
 from os import remove
 from os import path
 import argparse
+from tkinter.font import names
 
 import fwindows
 import flinux
 import fmac
 import fvulns
+import config 
 
 
-# Constantes
-ConstURL = "https://www.cvedetails.com"
-ConstSearchURL = "https://www.cvedetails.com/product-search.php?vendor_id=0&search="
-ConstVersionProduct = "https://www.cvedetails.com/version-search.php?vendor=&product="
-ConstVersionVersion = "version="
-ConstLinkJSon = 'https://www.cvedetails.com/json-feed.php'
 
-
-ConstFileAppInstaladas= "apps_local.txt"
-ConstFileAppNoEncontradas = "apps_local_notfound.txt"
-ConstFileSinonimos = "apps_traslate.txt"
-ConstFileAppForzar = "apps_forzar.txt"
-ConstDemoVulnerables = "apps_demo.txt"
 
 # Variables globales
 listTranslate=[]
 listForzar=[]
 listDemo=[]
-today = datetime.now().strftime('%Y-%m-%d')
 TextMessage = ""
 
 sistemaOperativo = sys.platform # Detectar sistema operativo /win32/Linux/Darwin
 
 # lee el fichero de translate para cambiar el nombre que nos dice el SO con el que tiene dado de alta CVDetails
 def leeSinonimos():
-    source = open(ConstFileSinonimos, 'r')
+    source = open(config.ConstFileSinonimos, 'r')
     for line in source:
         if not line.startswith('#') and line.strip():
             listTranslate.append(line)
@@ -52,7 +40,7 @@ def leeSinonimos():
 
 # Aplicaciones a verificar aunque no las tengamos en el sistema
 def leeAppFozar():
-    source = open(ConstFileAppForzar, 'r')
+    source = open(config.ConstFileAppForzar, 'r')
     for line in source:
         if not line.startswith('#') and line.strip():
             listForzar.append(line)
@@ -60,26 +48,19 @@ def leeAppFozar():
 
 # para demos, aplicaciones vulnerables
 def leeAppDemoVulnerables():
-    source = open(ConstDemoVulnerables, 'r')
+    source = open(config.ConstDemoVulnerables, 'r')
     for line in source:
         if not line.startswith('#') and line.strip():
             listDemo.append(line)
     source.close()
 
 
-def miraSiTraslate(nom):
-    result = nom
-    if len(listTranslate)>0:
-        for x in listTranslate:
-          if (x.find(nom)!= -1):
-              nametemp = x.split(";") 
-              return nametemp[1].replace("\n","")
-    return nom
 
 
 
 def createFile():
     if(sistemaOperativo == "win32"):
+        fwindows.listTranslate = listTranslate
         fwindows.createFile()
     elif(sistemaOperativo == "Linux"):
         flinux.createFile()
@@ -93,30 +74,37 @@ def vulnDemo():
             nametemp = x.split(";") 
             fvulns.busca_cve(nametemp[0], nametemp[1])
 
-def vulnVersionL():
-    return True
-
-def vulnVersionD():
-    return True
 
 def vulnVersion():
     if(sistemaOperativo == "win32"):
         fwindows.vulnVersion()
     elif(sistemaOperativo == "Linux"):
-        vulnVersionL()
+        flinux.vulnVersion()
     elif(sistemaOperativo == "Darwin"):
-        vulnVersionD()
+        fmac.vulnVersion()
 
 
 
 def main():
     # argumentos
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', default=today, dest='DATE')
-    parser.add_argument('-m', default='1', dest='MINCVSS')
-    parser.add_argument('-t', default='', dest='TGTOKENID', nargs=2)
+    parser.add_argument('-c', 
+                    dest='create_file',
+                    help='crea el fichero de aplicaciones encontradas')
+    parser.add_argument('-m', action='store',
+                    dest='monitorizar_apps',
+                    help='monitoriza las apliaciones encontradas')
+    parser.add_argument('-s', action='store',
+                    dest='serach_vulns',
+                    help='busca CVE segun version')
+    parser.add_argument('-v', action='store',
+                    dest='Verbose',
+                    help='muestra información por pantalla')
 
-    namespace = parser.parse_args()
+   # namespace = parser.parse_args()
+
+
+
 
 
     if(sistemaOperativo == "win32"):
@@ -128,24 +116,25 @@ def main():
 
     # borramos ficheros de apps y errores
     print ("Inicio de proceso")
-    if path.exists(ConstFileAppInstaladas):        
-        remove(ConstFileAppInstaladas)
-    if path.exists(ConstFileAppNoEncontradas):        
-        remove(ConstFileAppNoEncontradas)
+    #if (namespace.monitorizar_apps):
+    if path.exists(config.ConstFileAppInstaladas):        
+        remove(config.ConstFileAppInstaladas)
+    if path.exists(config.ConstFileAppNoEncontradas):        
+        remove(config.ConstFileAppNoEncontradas)
 
     # leemos lista sinonimos
     print ("Lectura de sinónimos")
-    if path.exists(ConstFileSinonimos):    
+    if path.exists(config.ConstFileSinonimos):    
         leeSinonimos()    
 
     # leemos lista Aplicaciones a verificar si o si
     print ("Lectura de Aplicaciones forzadas")
-    if path.exists(ConstFileAppForzar):    
+    if path.exists(config.ConstFileAppForzar):    
         leeAppFozar()    
 
     # leemos lista Aplicaciones a verificar si o si
     print ("Lectura de Aplicaciones vulnerables (DEMO)")
-    if path.exists(ConstDemoVulnerables):    
+    if path.exists(config.ConstDemoVulnerables):    
         leeAppDemoVulnerables()    
 
 
@@ -154,8 +143,8 @@ def main():
     createFile()
 
     # Buscamos vulnerabilidades a fecha de hoy
-    print ("Buscando vulnerabilidades nuevas del software instalado")
-    fvulns.vuln()
+    print ("Monitorizando aplicaciones")
+    fvulns.monitorizarapps()
 
     # Buscamos vulnerabilidades segun version instalada
     print ("Buscando vulnerabilidades del software instalado, segun versión instalada")
