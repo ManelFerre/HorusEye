@@ -1,32 +1,31 @@
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=7-Zip 21.02 alpha (x64)
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=MAGIX Video Pro X
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=MAGIX Travel Maps
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Update Notifier
 https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft 365 - es-es
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=PuTTY release 0.75 (64-bit)
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Oracle VM VirtualBox 6.1.32
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Management Engine Components
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=SafeSign 64-bits
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Wolf Security
 https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Update Health Tools
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Google Drive
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2005 Redistributable (x64)
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=OpenJDK JDK con Hotspot 8.0.262.10 (x64)
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Comprobación de estado de PC Windows
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Java(TM) SE Development Kit 17.0.1 (64-bit)
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=VEGAS Pro 17.0
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Adobe Acrobat DC (64-bit)
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Canon My Image Garden
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Canon My Image Garden Design Files
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Canon My Printer
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=MAGIX Video Pro X (Templates and effects)
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Windows Subsystem for Linux Update
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Security Update Service
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Serial IO
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Comprovació de l'estat de l'ordinador del Windows
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2010  x64 Redistributable - 10.0.30319
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Sure Run
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Sure Recover
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Citrix Workspace 2006
 https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Edge Update
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=WebView2 Runtime de Microsoft Edge
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=MAGIX Speed burnR
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=PyCharm Community Edition 2021.3
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=AMD Catalyst Control Center
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2012 Redistributable (x86) - 11.0.50727
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2015-2019 Redistributable (x64) - 14.24.28127
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=MSXML 4.0 SP3 Parser (KB2721691)
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2013 Redistributable (x64) - 12.0.21005
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Adobe Acrobat X Standard - Italiano, Español, Nederlands, Português
-https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2012 Redistributable (x64) - 11.0.61030
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Edge WebView2 Runtime
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Realtek USB Audio
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2010  x86 Redistributable - 10.0.30319
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP MAC Address Manager
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Collaboration Keyboard for Skype for Business
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HttpToUsbBridge
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Collaboration Keyboard
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Chipset Device Software
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Connection Optimizer
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Dynamic Tuning
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Teams Machine-Wide Installer
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2015-2019 Redistributable (x64) - 14.26.28720
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Notifications
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=HP Collaboration Keyboard For Cisco UCC
 https://www.cvedetails.com/product-search.php?vendor_id=0&search=Microsoft Visual C++ 2015-2019 Redistributable (x86) - 14.24.28127
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Intel(R) Processor Graphics
+https://www.cvedetails.com/product-search.php?vendor_id=0&search=Brother iPrint&Scan

@@ -65,20 +65,14 @@ def vulnVersion():
     output = p3.communicate()[0]
     #print(output.decode('utf-8').replace(":amd64",""))
     mylist = output.decode('utf-8').replace(":amd64","").split("\n")
-    fOk = open(config.ConstFileAppInstaladas, 'a')
-    fKo = open(config.ConstFileAppNoEncontradas, 'a')
-    try:
-        for AppSearch in mylist:
-            if (AppSearch > "" ):
-                # se saltan los que decimos que no queremos en translate
-                nametemp = miraSiTraslate(AppSearch)
-                if (nametemp > ""):
-                    url =  config.ConstSearchURL + nametemp
-                    appUrl = fvulns.GetURL (url)
-                    if (appUrl > ""):
-                        fOk.write(appUrl + '\n')
-                    else:
-                        fKo.write(url + '\n')
-    finally:
-        fOk.close()
-        fKo.close()
+   
+    for AppSearch in mylist:
+        if (AppSearch > "" ):
+            # se saltan los que decimos que no queremos en translate
+            nametemp = miraSiTraslate(AppSearch)
+            if (nametemp > ""):
+                url =  config.ConstSearchURL + nametemp
+                appUrl = fvulns.GetURL (url)
+#                if (appUrl > ""):
+#                    fvulns.busca_cve(nametemp, item.version)
+  

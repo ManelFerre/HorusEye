@@ -4,15 +4,13 @@
 #    por fecha de hoy basado en vuls-control
 #    por versión, busca si la versión instalada es vulnerable
 
-from operator import truediv
+#from operator import truediv
 import sys
 
-from sys import exit
+#from sys import exit
 from os import remove
 from os import path
 import argparse
-from tkinter.font import names
-
 
 
 # Cargamos funciones segun su sistema operativo /win32/Linux/Darwin
@@ -27,7 +25,6 @@ elif(sistemaOperativo == "darwin"):
 import fvulns
 # Configuración Constantes
 import config 
-
 
 
 
@@ -96,78 +93,106 @@ def vulnVersion():
     elif(sistemaOperativo == "Darwin"):
         fmac.vulnVersion()
 
+def gestionargumentos():
 
+
+    appdesc = "HorusEye Buscador de vuberabilidades CVEs de programas instalados."
+    parser = argparse.ArgumentParser(description=appdesc)
+    # argumentos
+    parser.add_argument('-c', 
+                        dest='create_file',
+                        action='store_true', 
+                        default='False',
+                        required=False,
+                        help='Crea fichero temporal.')
+    parser.add_argument('-m', 
+                        dest='monitorizar_apps',
+                        action='store_true', 
+                        default='False', 
+                        required=False,
+                        help='Monitoriza el sistema.')
+    parser.add_argument('-s', 
+                        dest='search_vulns',
+                        action='store_true', 
+                        default='False', 
+                        required=False,
+                        help='Busca vulnerabilidades por versión.')
+    parser.add_argument('-v', 
+                        dest='verbose',
+                        action='store_true', 
+                        default='False', 
+                        required=False,
+                        help='Muestra información por pantalla')
+    parser.add_argument('-d', 
+                        dest='demo',
+                        action='store_true', 
+                        default='False', 
+                        required=False,
+                        help='Ejecuta la demo')
+
+    return parser.parse_args()
+
+def print_log(_verb, Text):
+   if (_verb == True): 
+       print(Text)
 
 def main():
-    # argumentos
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-c', 
-                    dest='create_file',
-                    help='crea el fichero de aplicaciones encontradas')
-    parser.add_argument('-m', action='store',
-                    dest='monitorizar_apps',
-                    help='monitoriza las apliaciones encontradas')
-    parser.add_argument('-s', action='store',
-                    dest='serach_vulns',
-                    help='busca CVE segun version')
-    parser.add_argument('-v', action='store',
-                    dest='Verbose',
-                    help='muestra información por pantalla')
-
-   # namespace = parser.parse_args()
-
-
-
-
+    namespace = gestionargumentos()
+    _verbose = namespace.verbose
 
     if(sistemaOperativo == "win32"):
-        print ("Sistema operativo Windows")
+        print_log (_verbose, "Sistema operativo Windows")
     elif(sistemaOperativo == "Linux"):
-        print ("Sistema operativo Linux")
+        print_log (_verbose, "Sistema operativo Linux")
     elif(sistemaOperativo == "Darwin"):
-        print ("Sistema operativo Mac")
+        print_log (_verbose, "Sistema operativo Mac")
+
+    print_log (_verbose, "Inicio de proceso")
 
     # borramos ficheros de apps y errores
-    print ("Inicio de proceso")
-    #if (namespace.monitorizar_apps):
-    if path.exists(config.ConstFileAppInstaladas):        
-        remove(config.ConstFileAppInstaladas)
-    if path.exists(config.ConstFileAppNoEncontradas):        
-        remove(config.ConstFileAppNoEncontradas)
+    if (namespace.create_file is True):
+        if path.exists(config.ConstFileAppInstaladas):        
+            remove(config.ConstFileAppInstaladas)
+        if path.exists(config.ConstFileAppNoEncontradas):        
+            remove(config.ConstFileAppNoEncontradas)
 
     # leemos lista sinonimos
-    print ("Lectura de sinónimos")
     if path.exists(config.ConstFileSinonimos):    
+        print_log (_verbose, "Lectura de sinónimos")
         leeSinonimos()    
 
     # leemos lista Aplicaciones a verificar si o si
-    print ("Lectura de Aplicaciones forzadas")
     if path.exists(config.ConstFileAppForzar):    
+        print_log (_verbose, "Lectura de Aplicaciones forzadas")
         leeAppFozar()    
 
     # leemos lista Aplicaciones a verificar si o si
-    print ("Lectura de Aplicaciones vulnerables (DEMO)")
     if path.exists(config.ConstDemoVulnerables):    
+        print_log (_verbose, "Lectura de Aplicaciones vulnerables (DEMO)")
         leeAppDemoVulnerables()    
 
     # mueve listas
     ini()
 
     # creamos el fichero de applicaciones del servidor
-    print ("Creamos ficheros temporales")
-    createFile()
+    if (namespace.create_file is True):
+        print_log (_verbose, "Creamos ficheros temporales")
+        createFile()
 
     # Buscamos vulnerabilidades a fecha de hoy
     # se basa en los ficheros generados y en el de forzado
-    print ("Monitorizando aplicaciones")
-    fvulns.monitorizarapps()
+    if (namespace.monitorizar_apps is True):
+        print_log (_verbose, "Monitorizando aplicaciones")
+        fvulns.monitorizarapps()
 
     # Buscamos vulnerabilidades segun version instalada
-    print ("Buscando vulnerabilidades del software instalado, segun versión instalada")
-    vulnVersion()
+    if (namespace.search_vulns is True):
+        print_log (_verbose, "Buscando vulnerabilidades del software instalado, segun versión instalada")
+        vulnVersion()
 
-    print("buscamos las aplicaicones DEMO que son vulnerables")
-    vulnDemo()
+    if (namespace.demo is True):
+        print_log (_verbose, "buscamos las aplicaicones DEMO que son vulnerables")
+        vulnDemo()
 
 if __name__ == '__main__':
     main()

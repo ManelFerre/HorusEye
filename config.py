@@ -16,4 +16,4 @@ ConstFileSinonimos = "apps_traslate.txt"
 ConstFileAppForzar = "apps_forzar.txt"
 ConstDemoVulnerables = "apps_demo.txt"
 
-today = '2019-08-29' #datetime.now().strftime('%Y-%m-%d')
+today = datetime.now().strftime('%Y-%m-%d')

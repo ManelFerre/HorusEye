@@ -12,7 +12,7 @@ def enviaMail(nombre, version,  cves):
     # Paramentros conexion
     password = "jjvumbzsvnpkspgr"
     msg['From'] = "horuseye.notification@gmail.com"
-    msg['To'] = "manel.ferre@tecdes.es"
+    msg['To'] = "horuseye.notification@gmail.com"
     msg['Subject'] = nombre + " Alerta Vulnerabilidad encotrada"
     
     # mensaje

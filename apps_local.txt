@@ -1,7 +1,9 @@
+https://www.cvedetails.com/product/5871/Igor-Pavlov-7-zip.html
 https://www.cvedetails.com/product/47271/Microsoft-Onedrive.html
 https://www.cvedetails.com/product/9978/Videolan-Vlc-Media-Player.html
-https://www.cvedetails.com/product/12155/Vmware-Vmware-Workstation.html
-https://www.cvedetails.com/product/40173/Anydesk-Anydesk.html
+https://www.cvedetails.com/product/817/Putty-Putty.html
 https://www.cvedetails.com/product/4187/Techland-Chrome.html
+https://www.cvedetails.com/product/20406/Oracle-Vm-Virtualbox.html
 https://www.cvedetails.com/product/26853/Lorex-Technology-Edge.html
 https://www.cvedetails.com/product/2147/Python-Software-Foundation-Python.html
+https://www.cvedetails.com/product/497/Adobe-Acrobat-Reader.html
